@@ -1,5 +1,3 @@
-import pathlib
-from project.helpers.root_dir import ROOT_DIR
 from environs import Env
 
 env = Env()

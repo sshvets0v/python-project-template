@@ -219,3 +219,8 @@ __marimo__/
 
 # MacOS System Files
 .DS_Store
+
+#MLFlow
+mlruns/
+mlflow.db
+mlartifacts/
