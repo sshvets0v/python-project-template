@@ -8,11 +8,8 @@
 
 ```python
 %load_ext kedro.ipython
-%reload_kedro --params dataset_name=diabetes
 ```
 
-Если проект не найден из текущей папки, укажите его абсолютный путь
-после `%reload_kedro` перед `--params`.
 Расширение предоставляет `catalog`, `context`, `session` и `pipelines`:
 
 ```python
@@ -21,7 +18,7 @@ df.head()
 ```
 
 Каталог использует те же профили и пути, что и CLI.
-Для смены датасета или перечитывания YAML выполните `%reload_kedro` снова.
+Для смены датасета или перечитывания YAML выполните `%reload_kedro`.
 
 ## Перечитывать изменённые Python-функции
 
@@ -37,24 +34,10 @@ Autoreload полезен при редактировании импортиро
 ## Resolver oc.env
 
 При загрузке через Kedro используется проектный `settings.py`:
-он загружает `.env` и регистрирует resolver. Повторять регистрацию
-`oc.env` вручную в таком notebook не требуется.
+он загружает `.env` и регистрирует resolver `oc.env`. 
 
-Если создаёте OmegaConfigLoader самостоятельно, передайте настройки проекта:
 
-```python
-from kedro.config import OmegaConfigLoader
-from project.helpers import ROOT_DIR
-from project.settings import CONFIG_LOADER_ARGS
-
-loader = OmegaConfigLoader(
-    conf_source=ROOT_DIR / "conf",
-    runtime_params={"dataset_name": "diabetes"},
-    **CONFIG_LOADER_ARGS,
-)
-```
-
-Прямые вызовы split/train не выполняют Kedro hooks и не создают run.
+Использование функций из `project/` не влечет за собой запуск kedro или mlflow серверов, но до тех пор, пока в самих функциях не используются инструменты
 Для ручной записи результатов см. [MLflow в notebook](../mlflow/notebook.md).
 
 [Kedro в Jupyter](https://docs.kedro.org/en/stable/integrations-and-plugins/notebooks_and_ipython/kedro_and_notebooks/)
